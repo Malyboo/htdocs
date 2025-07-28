@@ -38,3 +38,31 @@ SELECT * FROM usuario;
 SELECT * FROM usuario WHERE nome LIKE 'Marlon';
 --
 SELECT * FROM usuario WHERE id BETWEEN 1 AND 3 ORDER BY nome;
+
+--criar tabela de regiao
+CREATE TABLE regiao(
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(45)
+);
+
+INSERT INTO regiao (nome) VALUES
+('Noroeste'),
+('Sul');
+
+--criar tabela de cidade
+CREATE TABLE cidade(
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(45) NOT NULL,
+    CEP VARCHAR(15),
+    estado CHAR(2),
+    id_regiao_fk INT,
+    FOREIGN KEY (id_regiao_fk) REFERENCES regiao(id)
+);
+INSERT INTO cidade (nome, cep, estado, id_regiao_fk) VALUES
+('Nova Londrina', '97970-000', 'RP', 1),
+('Marilena', '87960-000', 'PR', 1),
+('Palmas', '85555-000', 'PR', 2);
+
+SELECT cidade,nome, regiao.nome
+FROM cidade INNER JOIN regiao
+ON cidade.id_regiao_fk = regiao.id;

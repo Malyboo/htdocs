@@ -15,11 +15,21 @@ $coluna = mysqli_fetch_assoc($resultado);
 //imprime o nome da pessoa, se achar no banco
 echo $coluna['nome'];
 
-if(mysqli_num_rows($resultado) > 0){
-header('Location:../principal.php');
-} else{
+if (mysqli_num_rows($resultado) > 0) {
+    session_start(); //iniciar a cessão
+
+    //criar variáveis de sessão
+    $_SESSION['usuario'] = $coluna['nome'];
+    $_SESSION['cpf'] = $coluna['cpf'];
+    $_SESSION['senha'] = $coluna['senha'];
+
+    //redireciona para a página principal
+    //se a sessão for iniciada com sucesso, redireciona para a página principal
+    //caso contrário, redireciona para a página de login com erro
+    header('Location:../principal.php');
+} else {
     //se não encontrar, redireciona para a página de login com erro
-    header('Location:../index.php');
+    header('Location:../index.php?erro=1');
 }
 
 ?>

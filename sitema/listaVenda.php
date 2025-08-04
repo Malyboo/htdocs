@@ -59,19 +59,19 @@
       <table class="table table-bordered table-striped" id="tabela">
         <thead>
           <tr>
-          <th> Região </th>
-          <th> Cidade </th>
-          <th> Ponto Focal </th>
-          <th> Tipo </th>
-          <th> Área do Cxamurso </th>
-          <th> Data da Compra </th>
-          <th> Origem </th>
-          <th> Observação </th>
-          <th> Excluir </th>
+            <th> Região </th>
+            <th> Cidade </th>
+            <th> Ponto Focal </th>
+            <th> Tipo </th>
+            <th> Área do Cxamurso </th>
+            <th> Data da Compra </th>
+            <th> Origem </th>
+            <th> Observação </th>
+            <th> Excluir </th>
           </tr>
 
-          <tbody>
-            <tr>
+        <tbody>
+          <tr>
             <td> Noroeste </td>
             <td> Porto Rico </td>
             <td> Prefeitura </td>
@@ -85,8 +85,8 @@
                 <i class="fa-solid fa-trash-can"></i>
               </a>
             </td>
-            </tr>
-          </tbody>
+          </tr>
+        </tbody>
         </thead>
       </table>
     </div>

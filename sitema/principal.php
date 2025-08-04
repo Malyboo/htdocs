@@ -64,13 +64,17 @@
 
       <div class="col-2 menu">
         <ul class="menu">
+          <p style="color:white";>
+            Bem-Vindo(a) <?php session_start(); echo $_SESSION['usuario']; ?>
+        </p>
           <li> <a href="#" class="menu-item"> <i class="fa-solid fa-user"></i> Usuário </a> </li>
           <li> <a href="#" class="menu-item"> <i class="fa-solid fa-location-dot"></i> Regiões </a> </li>
           <li> <a href="#" class="menu-item"> <i class="fa-solid fa-city"></i> Cidades </a> </li>
           <li> <a href="#" class="menu-item"> <i class="fa-solid fa-user-tie"></i> Pontos Focais </a> </li>
           <li> <a href="#" class="menu-item"> <i class="fa-solid fa-graduation-cap"></i> Áreas </a> </li>
           <li> <a href="#" class="menu-item"> <i class="fa-solid fa-cart-shopping"></i> Efetuar Vendas </a> </li>
-          <li> <a href="#" class="menu-item"> <i class="fa-solid fa-magnifying-glass-dollar"></i> Pesquisar Vendas </a> </li>
+          <li> <a href="#" class="menu-item"> <i class="fa-solid fa-magnifying-glass-dollar"></i> Pesquisar Vendas </a>
+          </li>
         </ul>
       </div>
 
@@ -145,7 +149,9 @@
   </div>
 
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdn.datatables.net/2.3.2/js/dataTables.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"

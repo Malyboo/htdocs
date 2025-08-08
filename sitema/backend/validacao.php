@@ -1,15 +1,16 @@
-<?php
-session_start(); // Inicia a sessão
+ <?php
+    session_start();
 
-if(!insset($_CESSION['cpf']) or !insset($_SESSION['senha'])){
-    //destruir sessão
-    session_destroy();
-    unset($_SESSION['cpf']);
-    unset($_SESSION['senha']);
+    //se não estiver logado, mandar para o login
+    //se não existir a variável de sessão cpf ou senha
 
-
-//manda para o login
-header('location:../index.php');
-
-}
+    if(!isset($_SESSION['cpf']) or !isset($_SESSION['senha'])) {
+        //destruir a sessão
+        session_destroy();
+        unset($_SESSION['cpf']);
+        unset($_SESSION['senha']);
+        
+        //manda para o login
+        header('location:./index.php');
+    }
 ?>

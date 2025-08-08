@@ -1,3 +1,8 @@
+<?php
+include 'backend/conexao.php';
+include 'backend/validacao.php';
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -50,7 +55,7 @@
         <form class="d-flex" role="search">
           <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" />
           <button class="btn btn-outline-light " type="submit"> <i class="fa-solid fa-magnifying-glass"></i> </button>
-          <a href="#" class="btn btn-outline-light ms-2"> <i class="fa-solid fa-right-from-bracket"></i> </a>
+          <a href="./backend/sair.php" class="btn btn-outline-light ms-2"> <i class="fa-solid fa-right-from-bracket"></i> </a>
         </form>
 
 
@@ -65,7 +70,7 @@
       <div class="col-2 menu">
         <ul class="menu">
           <p style="color:white";>
-            Bem-Vindo(a) <?php session_start(); echo $_SESSION['usuario']; ?>
+            Bem-Vindo(a) <?php echo $_SESSION['usuario']; ?>
         </p>
           <li> <a href="#" class="menu-item"> <i class="fa-solid fa-user"></i> Usuário </a> </li>
           <li> <a href="#" class="menu-item"> <i class="fa-solid fa-location-dot"></i> Regiões </a> </li>
@@ -78,7 +83,7 @@
         </ul>
       </div>
 
-      <div class="col-5">
+      <div class="col-3">
         <h1> Cadastro </h1>
 
         <form>
@@ -95,7 +100,7 @@
           <div class="mb-3">
             <label for="senha" class="form-label">Senha</label>
             <div class="input-group">
-              <input type="password" class="form-control" id="senha" placeholder="Digite sua senha">
+              <input type="password" class="form-control" id="senha" autocomplete="new-password" placeholder="Digite sua senha">
               <button class="btn btn-outline-secondary" type="button" id="toggleSenha">
                 <i class="fa fa-eye" id="iconeOlho"></i>
               </button>
@@ -108,37 +113,41 @@
       </div>
 
 
-      <div class="col-5">
+      <div class="col-7">
         <h1> Listagem </h1>
 
         <table id="tabela" class="table table-striped table-bordered">
           <thead class="table-primary">
             <tr>
-              <th scope="col">Id</th>
-              <th scope="col">Nome</th>
-              <th scope="col">E-mail</th>
-              <th scope="col">Senha</th>
+              <th scope="col"> Id </th>
+              <th scope="col"> Nome </th>
+              <th scope="col"> E-mail </th>
+              <th scape="col"> CPF </th>
+              <th scope="col"> Senha </th>
+              <th scape="col"> Opções </th>
             </tr>
           </thead>
           <tbody>
+          <?php
+          $sql = "SELECT * FROM usuario";
+          //executa o comando
+          $dados = mysqli_query($conexao, $sql);
+          //percorrer todos os reistros do banco de dados
+          while($coluna = mysqli_fetch_assoc($dados)){
+            ?>
+          
+          
+
             <tr>
-              <th scope="row">1</th>
-              <td> Stênio </td>
-              <td> Stenio@gmail.com </td>
-              <td> 123 </td>
+              <th scope="row"> <?php echo $coluna['id'] ?></th>
+              <td> <?php echo $coluna ['nome'] ?> </td>
+              <td> <?php echo $coluna ['email'] ?> </td>
+              <td> <?php echo $coluna ['cpf'] ?> </td>
+              <td> <?php echo $coluna ['senha'] ?> </td>
+              <td> Opções vem aqui </td>
             </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td> Arlindo </td>
-              <td> Arlindo@gmail.com </td>
-              <td> lindo123 </td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td> Maria </td>
-              <td> Maria@gmail.com </td>
-              <td> MariaMaria </td>
-            </tr>
+            <?php } ?>
+           
           </tbody>
         </table>
       </div>

@@ -19,10 +19,30 @@ include 'backend/validacao.php';
 
   <link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.dataTables.css" />
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/notyf/3.10.0/notyf.min.js" integrity="sha512-467grL09I/ffq86LVdwDzi86uaxuAhFZyjC99D6CC1vghMp1YAs+DqCgRvhEtZIKX+o9lR0F2bro6qniyeCMEQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/notyf/3.10.0/notyf.min.css" integrity="sha512-ZX18S8AwqoIm9QCd1EYun82IryFikdJt7lxj6583zx5Rvr5HoreO9tWY6f2VhSxvK+48vYFSf4zFtX/t2ge62g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
   <link rel="stylesheet" href="estilo.css">
 </head>
 
 <body>
+  //se existir uma requisição grt ERR e se ERRO = 1
+   <?php
+    //se existir uma requisição get e se ERROR =1
+    if(isset($_SESSION['mensagem'])){
+        echo "<script>
+        var notyf = new Notyf({
+          duration: 3000,
+          position: {
+            x: 'right',
+            y: 'top',
+    },
+      });
+        notyf.error('Excluido com Sucesso!');
+
+        </script>";
+      }
+      ?>
   <nav class="navbar navbar-expand-lg bg-primary navbar-dark navegacao">
     <div class="container-fluid">
       <a class="navbar-brand" href="#"> <i class="fa-solid fa-handshake"></i> R.I.C.S </a>
@@ -86,21 +106,25 @@ include 'backend/validacao.php';
       <div class="col-3">
         <h1> Cadastro </h1>
 
-        <form>
+        <form action="./backend/usuario/inserir.php" method="POST">
+          <div class="mb-3">
+            <label class="form-label"> nome </label>
+            <input name="nome" type="text" class="form-control">
+          </div>
           <div class="mb-3">
             <label class="form-label"> CPF </label>
-            <input type="text" class="form-control">
+            <input name="cpf" type="text" class="form-control cpf">
           </div>
 
           <div class="mb-3">
             <label class="form-label"> E-mail </label>
-            <input type="email" class="form-control">
+            <input name="email" type="email" class="form-control">
           </div>
 
           <div class="mb-3">
             <label for="senha" class="form-label">Senha</label>
             <div class="input-group">
-              <input type="password" class="form-control" id="senha" autocomplete="new-password" placeholder="Digite sua senha">
+              <input name="senha" type="password" class="form-control" id="senha" autocomplete="new-password" placeholder="Digite sua senha">
               <button class="btn btn-outline-secondary" type="button" id="toggleSenha">
                 <i class="fa fa-eye" id="iconeOlho"></i>
               </button>
@@ -144,7 +168,10 @@ include 'backend/validacao.php';
               <td> <?php echo $coluna ['email'] ?> </td>
               <td> <?php echo $coluna ['cpf'] ?> </td>
               <td> <?php echo $coluna ['senha'] ?> </td>
-              <td> Opções vem aqui </td>
+              	      <td> 
+                <a href="#"><i class="fa-solid fa-pen-to-square me-3" style="color: blue;"></i></a>  
+                <a href="<?php echo "./backend/usuario/excluir.php?id=".$coluna['id'] ?>" onclick="return confirm('Deseja realmente excluir?')"> <i class="fa-solid fa-trash ms-2" style="color: #ff0000;"></i> </a>  
+              </td>
             </tr>
             <?php } ?>
            
@@ -162,12 +189,12 @@ include 'backend/validacao.php';
     integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdn.datatables.net/2.3.2/js/dataTables.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
     crossorigin="anonymous"></script>
   <script src="script.js"></script>
-
 </body>
 
 </html>

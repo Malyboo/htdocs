@@ -1,6 +1,19 @@
 <?php
-include 'backend/conexao.php';
-include 'backend/validacao.php';
+include './backend/conexao.php';
+include './backend/validacao.php';
+
+$destino = "./backend/usuario/inserir.php";
+
+//caso eu esteja alterando algum registro
+//se for dferente de vazio, se tiver id na URL
+if(!empty($_GET['id'])){
+$id = $_GET['id'];
+$sql = "SELECT * FROM usuario WHERE id='$id' ";
+//executa sql
+$dados = mysqli_query($conexao, $sql);
+$usuarios = mysqli_fetch_assoc($dados);
+$destino = "./backend/usuario/alterar.php";
+}
 ?>
 
 <!DOCTYPE html>
@@ -26,8 +39,9 @@ include 'backend/validacao.php';
 </head>
 
 <body>
-  //se existir uma requisição grt ERR e se ERRO = 1
+  
    <?php
+
     //se existir uma requisição get e se ERROR =1
     if(isset($_SESSION['mensagem'])){
         echo "<script>
@@ -38,9 +52,10 @@ include 'backend/validacao.php';
             y: 'top',
     },
       });
-        notyf.error('Excluido com Sucesso!');
+        notyf.success(' ".$_SESSION['mensagem']." ');
 
         </script>";
+        unset($_SESSION['mensagem']);
       }
       ?>
   <nav class="navbar navbar-expand-lg bg-primary navbar-dark navegacao">
@@ -169,7 +184,7 @@ include 'backend/validacao.php';
               <td> <?php echo $coluna ['cpf'] ?> </td>
               <td> <?php echo $coluna ['senha'] ?> </td>
               	      <td> 
-                <a href="#"><i class="fa-solid fa-pen-to-square me-3" style="color: blue;"></i></a>  
+                <a href="./principal.php?id=<?= $coluna['id'] ?>"> <i class="fa-solid fa-pen-to-square me-3" style="color: blue;"></i></a>  
                 <a href="<?php echo "./backend/usuario/excluir.php?id=".$coluna['id'] ?>" onclick="return confirm('Deseja realmente excluir?')"> <i class="fa-solid fa-trash ms-2" style="color: #ff0000;"></i> </a>  
               </td>
             </tr>

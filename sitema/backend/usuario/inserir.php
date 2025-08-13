@@ -12,4 +12,7 @@ VALUES ('$nome', '$email', '$cpf', '$senha')";
 //executa sql
 $resultado = mysqli_query($conexao, $sql);
 header('location:../../principal.php');
+
+session_start();
+$_SESSION['mensagem'] = "Adicionado com Sucesso!";
 ?>

@@ -18,8 +18,6 @@ $destino = "./backend/usuario/alterar.php";
 }
 ?>
 
-
-
 <body>
   <?php include './recursos/menuSuperior.php'; ?>
 

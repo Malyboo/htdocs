@@ -1,6 +1,7 @@
 <?php
 include './backend/conexao.php';
 include './backend/validacao.php';
+include 'recursos/cabecalho.php';
 
 $destino = "./backend/cidade/inserir.php";
 
@@ -16,27 +17,6 @@ $destino = "./backend/cidade/alterar.php";
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sistema</title>
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-
-  <link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.dataTables.css" />
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/notyf/3.10.0/notyf.min.js" integrity="sha512-467grL09I/ffq86LVdwDzi86uaxuAhFZyjC99D6CC1vghMp1YAs+DqCgRvhEtZIKX+o9lR0F2bro6qniyeCMEQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/notyf/3.10.0/notyf.min.css" integrity="sha512-ZX18S8AwqoIm9QCd1EYun82IryFikdJt7lxj6583zx5Rvr5HoreO9tWY6f2VhSxvK+48vYFSf4zFtX/t2ge62g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-  <link rel="stylesheet" href="estilo.css">
-</head>
 
 <body>
   
@@ -103,19 +83,7 @@ $destino = "./backend/cidade/alterar.php";
     <div class="row">
 
       <div class="col-2 menu">
-        <ul class="menu">
-          <p style="color:white";>
-            Bem-Vindo(a) <?php echo $_SESSION['usuario']; ?>
-        </p>
-          <li> <a href="usuario.php" class="menu-item"> <i class="fa-solid fa-user"></i> Usuário </a> </li>
-          <li> <a href="regiao.php" class="menu-item"> <i class="fa-solid fa-location-dot"></i> Regiões </a> </li>
-          <li> <a href="cidade.php" class="menu-item"> <i class="fa-solid fa-city"></i> Cidades </a> </li>
-          <li> <a href="ponto_focal.php" class="menu-item"> <i class="fa-solid fa-user-tie"></i> Pontos Focais </a> </li>
-          <li> <a href="#" class="menu-item"> <i class="fa-solid fa-graduation-cap"></i> Áreas </a> </li>
-          <li> <a href="#" class="menu-item"> <i class="fa-solid fa-cart-shopping"></i> Efetuar Vendas </a> </li>
-          <li> <a href="#" class="menu-item"> <i class="fa-solid fa-magnifying-glass-dollar"></i> Pesquisar Vendas </a>
-          </li>
-        </ul>
+        <?php include 'recursos/menuLateral.php'; ?>
       </div>
 
       <div class="col-3">
@@ -131,6 +99,23 @@ $destino = "./backend/cidade/alterar.php";
             <label class="form-label"> nome </label>
             <input name="nome" type="text" autofocus value="<?php echo isset($cidades) ? $cidades['nome']: "" ?>" class="form-control">
           </div>
+
+          <div class="mb-3">
+            <label class="form-label"> CEP </label>
+            <input name="CEP" type="text" value="<?php echo isset($cidades) ? $cidades['CEP']: "" ?>" class="form-control cep">
+          </div>
+
+          <div class="mb-3">
+            <label> Estado </label>
+            <select name="estado" class="form-select" required>
+              <option> Selecione uma região </option>
+              <?php
+              $sql = "SELECT * FROM regiao order by nome";
+              $resultado = mysqli_query($conexao, $sql);
+              ?>
+              </select>
+              </div>
+            
 
           
 
@@ -148,6 +133,9 @@ $destino = "./backend/cidade/alterar.php";
             <tr>
               <th scope="col"> Id </th>
               <th scope="col"> Nome </th>
+              <th scope="col"> CEP </th>
+              <th scope="col"> Estado </th>
+              <th scope="col"> Região </th>
               <th scape="col"> Opções </th>
             </tr>
           </thead>
@@ -165,6 +153,9 @@ $destino = "./backend/cidade/alterar.php";
             <tr>
               <th scope="row"> <?php echo $coluna['id'] ?></th>
               <td> <?php echo $coluna ['nome'] ?> </td>
+              <td> <?php echo $coluna ['CEP'] ?> </td>
+              <td> <?php echo $coluna ['estado'] ?> </td>
+              <td> <?php echo $coluna ['id_regiao_fk'] ?> </td>
               
               	      <td> 
                 <a href="./cidade.php?id=<?= $coluna['id'] ?>"> <i class="fa-solid fa-pen-to-square me-3" style="color: blue;"></i></a>  

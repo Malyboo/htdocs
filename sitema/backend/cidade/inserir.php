@@ -5,17 +5,28 @@ include '../conexao.php';
 $nome = $_REQUEST['nome'];
 $CEP = $_REQUEST['CEP'];
 $estado = $_REQUEST['estado'];
-$id_regiao_fk = $_REQUEST['id_regiao_fk'];
+$regiao = $_REQUEST['regiao'];
+
+$sql2 = "SELECT * FROM cidade WHERE nome = '$nome' ";
+$resultado = mysqli_query($conexao, $sql2);
+
+if(mysqli_num_rows($resultado) > 0){
+    session_start();
+    $_SESSION['mensagem'] = "Cidade já cadastrada!";
+}else{
+
+
+
+$sql = "INSERT INTO cidade(nome, CEP, estado, id_regiao_fk) VALUES ('$nome','$CEP','$estado','$regiao')";
 
 
 
 
-$sql = "INSERT INTO cidade(nome), (CEP), estado, id_regiao_fk)
-VALUES ('$nome','$CEP','$estado','$id_regiao_fk')";
 //executa sql
 $resultado = mysqli_query($conexao, $sql);
-header('location:../../cidade.php');
-
 session_start();
-$_SESSION['mensagem'] = "Adicionado com Sucesso!";
+$_SESSION['mensagem'] = "$nome cadastrado com Sucesso!";
+}
+//mandar para pagina principal
+header('location:../../cidade.php');
 ?>

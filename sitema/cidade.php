@@ -103,15 +103,25 @@ $destino = "./backend/cidade/alterar.php";
           <div class="mb-3">
             <label class="form-label"> CEP </label>
             <input name="CEP" type="text" value="<?php echo isset($cidades) ? $cidades['CEP']: "" ?>" class="form-control cep">
+          </div> 
+          <div class="mb-3">
+            <label class="form-label"> Estado </label>
+            <input name="estado" type="text" value="<?php echo isset($cidades) ? $cidades['estado']: "" ?>" class="form-control">
           </div>
 
           <div class="mb-3">
-            <label> Estado </label>
-            <select name="estado" class="form-select" required>
+            <label> regiao </label>
+            <select name="regiao" class="form-select" required>
               <option> Selecione uma região </option>
               <?php
               $sql = "SELECT * FROM regiao order by nome";
               $resultado = mysqli_query($conexao, $sql);
+              $regiaoSelecionada = isset($cidades) ? $cidades['id_regiao_fk'] : '';
+
+              while($reg = mysqli_fetch_assoc($resultado)){
+              $selecao = ($reg['id'] == $regiaoSelecionada) ? 'selecione': '';
+              echo "<option value='{$reg['id']}' $selecao> {$reg['nome']} </option>";
+            }
               ?>
               </select>
               </div>
@@ -155,7 +165,14 @@ $destino = "./backend/cidade/alterar.php";
               <td> <?php echo $coluna ['nome'] ?> </td>
               <td> <?php echo $coluna ['CEP'] ?> </td>
               <td> <?php echo $coluna ['estado'] ?> </td>
-              <td> <?php echo $coluna ['id_regiao_fk'] ?> </td>
+              <?php
+              $sql = "SELECT nome FROM regiao WHERE id = ".$coluna['id_regiao_fk'];
+              $resultado = mysqli_query($conexao, $sql);
+              $regiao = mysqli_fetch_assoc($resultado);
+
+              ?>
+
+              <td> <?php echo $regiao['nome'] ?> </td>
               
               	      <td> 
                 <a href="./cidade.php?id=<?= $coluna['id'] ?>"> <i class="fa-solid fa-pen-to-square me-3" style="color: blue;"></i></a>  

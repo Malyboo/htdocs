@@ -1,8 +1,9 @@
 <?php
 include './backend/conexao.php';
 include './backend/validacao.php';
+include 'recursos/cabecalho.php';
+$destino = ".backend/ponto_focal/inserir.php";
 
-$destino = "./backend/ponto_focal/inserir.php";
 
 //caso eu esteja alterando algum registro
 //se for dferente de vazio, se tiver id na URL
@@ -11,32 +12,11 @@ $id = $_GET['id'];
 $sql = "SELECT * FROM ponto_focal WHERE id='$id' ";
 //executa sql
 $dados = mysqli_query($conexao, $sql);
-$ponto_focals = mysqli_fetch_assoc($dados);
+$ponto_focais = mysqli_fetch_assoc($dados);
 $destino = "./backend/ponto_focal/alterar.php";
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sistema</title>
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-
-  <link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.dataTables.css" />
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/notyf/3.10.0/notyf.min.js" integrity="sha512-467grL09I/ffq86LVdwDzi86uaxuAhFZyjC99D6CC1vghMp1YAs+DqCgRvhEtZIKX+o9lR0F2bro6qniyeCMEQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/notyf/3.10.0/notyf.min.css" integrity="sha512-ZX18S8AwqoIm9QCd1EYun82IryFikdJt7lxj6583zx5Rvr5HoreO9tWY6f2VhSxvK+48vYFSf4zFtX/t2ge62g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-  <link rel="stylesheet" href="estilo.css">
-</head>
 
 <body>
   
@@ -103,19 +83,7 @@ $destino = "./backend/ponto_focal/alterar.php";
     <div class="row">
 
       <div class="col-2 menu">
-        <ul class="menu">
-          <p style="color:white";>
-            Bem-Vindo(a) <?php echo $_SESSION['usuario']; ?>
-        </p>
-          <li> <a href="usuario.php" class="menu-item"> <i class="fa-solid fa-user"></i> Usuário </a> </li>
-          <li> <a href="regiao.php" class="menu-item"> <i class="fa-solid fa-location-dot"></i> Regiões </a> </li>
-          <li> <a href="cidade.php" class="menu-item"> <i class="fa-solid fa-city"></i> Cidades </a> </li>
-          <li> <a href="ponto_focal.php" class="menu-item"> <i class="fa-solid fa-user-tie"></i> Pontos Focais </a> </li>
-          <li> <a href="#" class="menu-item"> <i class="fa-solid fa-graduation-cap"></i> Áreas </a> </li>
-          <li> <a href="#" class="menu-item"> <i class="fa-solid fa-cart-shopping"></i> Efetuar Vendas </a> </li>
-          <li> <a href="#" class="menu-item"> <i class="fa-solid fa-magnifying-glass-dollar"></i> Pesquisar Vendas </a>
-          </li>
-        </ul>
+        <?php include 'recursos/menuLateral.php'; ?>
       </div>
 
       <div class="col-3">
@@ -124,33 +92,74 @@ $destino = "./backend/ponto_focal/alterar.php";
         <form action="<?= $destino ?>" method="post">
           <div class="mb-3">
             <label class="form-label"> Id </label>
-            <input readonly name="id" type="text" value="<?php echo isset($ponto_focals) ? $ponto_focals['id']: "" ?>" class="form-control">
+            <input readonly name="id" type="text" value="<?php echo isset($ponto_focais) ? $ponto_focais['id']: "" ?>" class="form-control">
           </div>
 
           <div class="mb-3">
-            <label class="form-label"> nome </label>
-            <input name="nome" type="text" autofocus value="<?php echo isset($ponto_focals) ? $ponto_focals['nome']: "" ?>" class="form-control">
+            <label class="form-label"> Razão Social </label>
+            <input name="Razão Social" type="text" autofocus value="<?php echo isset($ponto_focais) ? $ponto_focais['nome']: "" ?>" class="form-control">
           </div>
 
           <div class="mb-3">
-            <label class="form-label"> E-mail </label>
-            <input name="email" type="email" value="<?php echo isset($ponto_focals) ? $ponto_focals['email']: "" ?>" class="form-control">
+            <label class="form-label"> Tipo </label>
+            <input name="Tipo" type="text" value="<?php echo isset($ponto_focais) ? $ponto_focais['CEP']: "" ?>" class="form-control cep">
+          </div> 
+          <div class="mb-3">
+            <label class="form-label"> CNPJ </label>
+            <input name="CNPJ" type="text" value="<?php echo isset($ponto_focais) ? $ponto_focais['estado']: "" ?>" class="form-control">
           </div>
 
           <div class="mb-3">
-            <label class="form-label"> CPF </label>
-            <input name="cpf" type="text" value="<?php echo isset($ponto_focals) ? $ponto_focals['cpf']: "" ?>" class="form-control cpf">
+            <label class="form-label"> Endereço </label>
+            <input name="Endereço" type="text" autofocus value="<?php echo isset($ponto_focais) ? $ponto_focais['nome']: "" ?>" class="form-control">
           </div>
+
+          <div class="mb-3">
+            <label class="form-label"> Telefone </label>
+            <input name="Telefone" type="text" value="<?php echo isset($ponto_focais) ? $ponto_focais['CEP']: "" ?>" class="form-control cep">
+          </div> 
+          <div class="mb-3">
+            <label class="form-label"> Celular </label>
+            <input name="Celular" type="text" value="<?php echo isset($ponto_focais) ? $ponto_focais['estado']: "" ?>" class="form-control">
+          </div>
+
+
+
+
+
+          <div class="mb-3">
+            <label class="form-label"> Email </label>
+            <input name="Email" type="text" autofocus value="<?php echo isset($ponto_focais) ? $ponto_focais['nome']: "" ?>" class="form-control">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label"> Cidade </label>
+            <input name="Cidade" type="text" value="<?php echo isset($ponto_focais) ? $ponto_focais['CEP']: "" ?>" class="form-control cep">
+          </div> 
+          <div class="mb-3">
+            <label class="form-label"> Opções </label>
+            <input name="Opções" type="text" value="<?php echo isset($ponto_focais) ? $ponto_focais['estado']: "" ?>" class="form-control">
+          </div>
+
+          <div class="mb-3">
+            <label> regiao </label>
+            <select name="regiao" class="form-select" required>
+              <option> Selecione uma região </option>
+              <?php
+              $sql = "SELECT * FROM regiao order by nome";
+              $resultado = mysqli_query($conexao, $sql);
+              $regiaoSelecionada = isset($ponto_focais) ? $ponto_focais['id_regiao_fk'] : '';
+
+              while($reg = mysqli_fetch_assoc($resultado)){
+              $selecao = ($reg['id'] == $regiaoSelecionada) ? 'selected': '';
+              echo "<option value='{$reg['id']}' $selecao> {$reg['nome']} </option>";
+            }
+              ?>
+              </select>
+              </div>
+            
+
           
-          <div class="mb-3">
-            <label class="form-label">Senha</label>
-            <div class="input-group">
-              <input name="senha" type="password" value="<?php echo isset($ponto_focals) ? $ponto_focals['senha']: "" ?>" class="form-control" id="senha" autocomplete="new-password">
-              <span onclick="visualizar()" style="cursor: pointer;" class="input-group-text"> 
-                <i id="olho" class="fa-solid fa-eye"></i>
-               </span>
-            </div>
-          </div>
 
           <button type="submit" class="btn btn-primary"> Salvar </button>
         </form>
@@ -166,9 +175,14 @@ $destino = "./backend/ponto_focal/alterar.php";
             <tr>
               <th scope="col"> Id </th>
               <th scope="col"> Nome </th>
-              <th scope="col"> E-mail </th>
-              <th scape="col"> CPF </th>
-              <th scope="col"> Senha </th>
+              <th scope="col"> Razão Social </th>
+              <th scope="col"> Tipo </th>
+              <th scope="col"> CNPJ </th>
+              <th scope="col"> Endereço </th>
+              <th scope="col"> Telefone </th>
+              <th scope="col"> Celular </th>
+              <th scope="col"> Email </th>
+              <th scope="col"> Cidade </th>
               <th scape="col"> Opções </th>
             </tr>
           </thead>
@@ -186,11 +200,26 @@ $destino = "./backend/ponto_focal/alterar.php";
             <tr>
               <th scope="row"> <?php echo $coluna['id'] ?></th>
               <td> <?php echo $coluna ['nome'] ?> </td>
+              <td> <?php echo $coluna ['razao_social'] ?> </td>
+              <td> <?php echo $coluna ['tipo'] ?> </td>
+              <td> <?php echo $coluna ['cnpj_cpf'] ?> </td>
+              <td> <?php echo $coluna ['endereco'] ?> </td>
+              <td> <?php echo $coluna ['telefone'] ?> </td>
+              <td> <?php echo $coluna ['celular'] ?> </td>
               <td> <?php echo $coluna ['email'] ?> </td>
-              <td> <?php echo $coluna ['cpf'] ?> </td>
-              <td> <?php echo $coluna ['senha'] ?> </td>
+              <td> <?php echo $coluna ['id_cidade_fk'] ?> </td>
+              
+              <?php
+              $sql = "SELECT nome FROM regiao WHERE id = ".$coluna['id_regiao_fk'];
+              $resultado = mysqli_query($conexao, $sql);
+              $regiao = mysqli_fetch_assoc($resultado);
+
+              ?>
+
+              <td> <?php echo $regiao['nome'] ?> </td>
+              
               	      <td> 
-                <a href="./principal.php?id=<?= $coluna['id'] ?>"> <i class="fa-solid fa-pen-to-square me-3" style="color: blue;"></i></a>  
+                <a href="./ponto_focal.php?id=<?= $coluna['id'] ?>"> <i class="fa-solid fa-pen-to-square me-3" style="color: blue;"></i></a>  
                 <a href="<?php echo "./backend/ponto_focal/excluir.php?id=".$coluna['id'] ?>" onclick="return confirm('Deseja realmente excluir?')"> <i class="fa-solid fa-trash ms-2" style="color: #ff0000;"></i> </a>  
               </td>
             </tr>

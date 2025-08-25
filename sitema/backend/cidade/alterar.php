@@ -4,9 +4,12 @@ include'../conexao.php';
 //receber dados do front-end
 $id = $_REQUEST['id'];
 $nome = $_REQUEST['nome'];
+$CEP = $_REQUEST['CEP'];
+$estado = $_REQUEST['estado'];
+$regiao = $_REQUEST['regiao'];
 
 //comando sql para atualizar os dados
-$sql = "UPDATE cidade SET nome='$nome' WHERE id='$id' ";
+$sql = "UPDATE cidade SET nome='$nome', cep='$CEP', estado='$estado', id_regiao_fk='$regiao' WHERE id='$id' ";
 
 //executa o sql
 mysqli_query($conexao, $sql);

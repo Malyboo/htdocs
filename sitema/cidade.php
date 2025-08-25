@@ -119,7 +119,7 @@ $destino = "./backend/cidade/alterar.php";
               $regiaoSelecionada = isset($cidades) ? $cidades['id_regiao_fk'] : '';
 
               while($reg = mysqli_fetch_assoc($resultado)){
-              $selecao = ($reg['id'] == $regiaoSelecionada) ? 'selecione': '';
+              $selecao = ($reg['id'] == $regiaoSelecionada) ? 'selected': '';
               echo "<option value='{$reg['id']}' $selecao> {$reg['nome']} </option>";
             }
               ?>

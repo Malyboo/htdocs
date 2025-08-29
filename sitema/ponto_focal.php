@@ -1,8 +1,8 @@
 <?php
 include './backend/conexao.php';
 include './backend/validacao.php';
-include 'recursos/cabecalho.php';
-$destino = ".backend/ponto_focal/inserir.php";
+include './recursos/cabecalho.php';
+$destino = "./backend/ponto_focal/inserir.php";
 
 
 //caso eu esteja alterando algum registro
@@ -96,62 +96,65 @@ $destino = "./backend/ponto_focal/alterar.php";
           </div>
 
           <div class="mb-3">
+            <label class="form-label"> Nome </label>
+            <input name="nome" type="text" autofocus value="<?php echo isset($ponto_focais) ? $ponto_focais['nome']: "" ?>" class="form-control">
+          </div>
+
+          <div class="mb-3">
             <label class="form-label"> Razão Social </label>
-            <input name="Razão Social" type="text" autofocus value="<?php echo isset($ponto_focais) ? $ponto_focais['nome']: "" ?>" class="form-control">
+            <input name="razao_social" type="text" autofocus value="<?php echo isset($ponto_focais) ? $ponto_focais['razao_social']: "" ?>" class="form-control">
           </div>
 
           <div class="mb-3">
             <label class="form-label"> Tipo </label>
-            <input name="Tipo" type="text" value="<?php echo isset($ponto_focais) ? $ponto_focais['CEP']: "" ?>" class="form-control cep">
+            <select class="form-select" name="tipo">
+            <option value="Privada"> Privada </option>
+            <option value="Pública"> Pública </option>
+            </select>
           </div> 
+
           <div class="mb-3">
             <label class="form-label"> CNPJ </label>
-            <input name="CNPJ" type="text" value="<?php echo isset($ponto_focais) ? $ponto_focais['estado']: "" ?>" class="form-control">
+            <input name="cnpj_cpf" type="text" value="<?php echo isset($ponto_focais) ? $ponto_focais['cnpj_cpf']: "" ?>" class="form-control cnpj">
           </div>
 
           <div class="mb-3">
             <label class="form-label"> Endereço </label>
-            <input name="Endereço" type="text" autofocus value="<?php echo isset($ponto_focais) ? $ponto_focais['nome']: "" ?>" class="form-control">
+            <input name="endereco" type="text" autofocus value="<?php echo isset($ponto_focais) ? $ponto_focais['endereco']: "" ?>" class="form-control">
           </div>
 
           <div class="mb-3">
             <label class="form-label"> Telefone </label>
-            <input name="Telefone" type="text" value="<?php echo isset($ponto_focais) ? $ponto_focais['CEP']: "" ?>" class="form-control cep">
+            <input name="telefone" type="text" value="<?php echo isset($ponto_focais) ? $ponto_focais['telefone']: "" ?>" class="form-control celular">
           </div> 
+
           <div class="mb-3">
             <label class="form-label"> Celular </label>
-            <input name="Celular" type="text" value="<?php echo isset($ponto_focais) ? $ponto_focais['estado']: "" ?>" class="form-control">
+            <input name="celular" type="text" value="<?php echo isset($ponto_focais) ? $ponto_focais['celular']: "" ?>" class="form-control celular">
           </div>
-
-
-
-
 
           <div class="mb-3">
             <label class="form-label"> Email </label>
-            <input name="Email" type="text" autofocus value="<?php echo isset($ponto_focais) ? $ponto_focais['nome']: "" ?>" class="form-control">
+            <input name="email" type="text" value="<?php echo isset($ponto_focais) ? $ponto_focais['email']: "" ?>" class="form-control">
           </div>
 
-          <div class="mb-3">
-            <label class="form-label"> Cidade </label>
-            <input name="Cidade" type="text" value="<?php echo isset($ponto_focais) ? $ponto_focais['CEP']: "" ?>" class="form-control cep">
-          </div> 
-          <div class="mb-3">
-            <label class="form-label"> Opções </label>
-            <input name="Opções" type="text" value="<?php echo isset($ponto_focais) ? $ponto_focais['estado']: "" ?>" class="form-control">
-          </div>
+
+
+
+
+        
 
           <div class="mb-3">
-            <label> regiao </label>
-            <select name="regiao" class="form-select" required>
-              <option> Selecione uma região </option>
+            <label> cidade </label>
+            <select name="cidade" class="form-select" required>
+              <option> Selecione uma cidade </option>
               <?php
-              $sql = "SELECT * FROM regiao order by nome";
+              $sql = "SELECT * FROM cidade order by nome";
               $resultado = mysqli_query($conexao, $sql);
-              $regiaoSelecionada = isset($ponto_focais) ? $ponto_focais['id_regiao_fk'] : '';
+              $cidadeSelecionada = isset($ponto_focais) ? $ponto_focais['id_cidade_fk'] : '';
 
               while($reg = mysqli_fetch_assoc($resultado)){
-              $selecao = ($reg['id'] == $regiaoSelecionada) ? 'selected': '';
+              $selecao = ($reg['id'] == $cidadeSelecionada) ? 'selected': '';
               echo "<option value='{$reg['id']}' $selecao> {$reg['nome']} </option>";
             }
               ?>
@@ -207,10 +210,10 @@ $destino = "./backend/ponto_focal/alterar.php";
               <td> <?php echo $coluna ['telefone'] ?> </td>
               <td> <?php echo $coluna ['celular'] ?> </td>
               <td> <?php echo $coluna ['email'] ?> </td>
-              <td> <?php echo $coluna ['id_cidade_fk'] ?> </td>
+              
               
               <?php
-              $sql = "SELECT nome FROM regiao WHERE id = ".$coluna['id_regiao_fk'];
+              $sql = "SELECT nome FROM cidade WHERE id = ".$coluna['id_cidade_fk'];
               $resultado = mysqli_query($conexao, $sql);
               $regiao = mysqli_fetch_assoc($resultado);
 

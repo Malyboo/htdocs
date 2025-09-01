@@ -47,6 +47,8 @@ $destino = "./backend/area/alterar.php";
 
           
 
+          
+
           <button type="submit" class="btn btn-primary"> Salvar </button>
         </form>
 
@@ -61,6 +63,7 @@ $destino = "./backend/area/alterar.php";
             <tr>
               <th scope="col"> Id </th>
               <th scope="col"> Nome </th>
+              <th scape="col"> Numero </th>
               <th scape="col"> Opções </th>
             </tr>
           </thead>
@@ -78,6 +81,8 @@ $destino = "./backend/area/alterar.php";
             <tr>
               <th scope="row"> <?php echo $coluna['id'] ?></th>
               <td> <?php echo $coluna ['nome'] ?> </td>
+              <td> <?php echo $coluna ['numero'] ?> </td>
+              
               
               	      <td> 
                 <a href="./area.php?id=<?= $coluna['id'] ?>"> <i class="fa-solid fa-pen-to-square me-3" style="color: blue;"></i></a>  

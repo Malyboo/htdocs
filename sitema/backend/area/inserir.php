@@ -3,7 +3,7 @@ include '../conexao.php';
 
 //receber dados do front-end
 $nome = $_REQUEST['nome'];
-$nome = $_REQUEST['numero'];
+$numero = $_REQUEST['numero'];
 
 
 $sql = "INSERT INTO area(nome, numero)

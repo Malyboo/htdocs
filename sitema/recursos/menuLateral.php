@@ -8,6 +8,6 @@
           <li> <a href="ponto_focal.php" class="menu-item"> <i class="fa-solid fa-user-tie"></i> Pontos Focais </a> </li>
           <li> <a href="area.php" class="menu-item"> <i class="fa-solid fa-graduation-cap"></i> Áreas </a> </li>
           <li> <a href="venda.php" class="menu-item"> <i class="fa-solid fa-cart-shopping"></i> Efetuar Vendas </a> </li>
-          <li> <a href="pesquisa.php" class="menu-item"> <i class="fa-solid fa-magnifying-glass-dollar"></i> Pesquisar Vendas </a>
+          <li> <a href="listaVenda.php" class="menu-item"> <i class="fa-solid fa-magnifying-glass-dollar"></i> Pesquisar Vendas </a>
           </li>
         </ul>

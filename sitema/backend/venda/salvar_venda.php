@@ -10,12 +10,15 @@ $dtcompra = $_REQUEST['dtcompra'];
 $origem = $_REQUEST['origem'];
 $obs = $_REQUEST['obs'];
 
-$sql = "INSERT INTO area(nome, numero)
-VALUES ('$nome', '$numero')";
+$sql = "INSERT INTO venda(data, origem, obs, id_ponto_focal_fk, id_area_fk) 
+VALUES ('$dtcompra','$origem','$obs', '$ponto_focal_id', '$area_id')";
+
 //executa sql
 $resultado = mysqli_query($conexao, $sql);
-header('location:../../area.php');
 
 session_start();
-$_SESSION['mensagem'] = "$nome Salvo com Sucesso!";
+$_SESSION['mensagem'] = "$id cadastrado com Sucesso!";
+
+//mandar para pagina principal
+header('Location:../../area.php');
 ?>

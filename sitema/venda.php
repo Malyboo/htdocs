@@ -81,7 +81,7 @@
         
         <div class="mt-4 d-flex justify-content-start">
           <button type="submit" class="btn btn-success"> Salvar </button>
-          <a href="index.html" class="btn btn-primary ms-1"> Voltar </a>
+          <a href="./principal.php" class="btn btn-primary ms-1"> Voltar </a>
         </div>
 
 
